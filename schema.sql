@@ -1,0 +1,32 @@
+
+CREATE TABLE categoria (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL UNIQUE,
+  descripcion TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE proveedor (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL UNIQUE,
+  telefono VARCHAR(20) NOT NULL,
+  ciudad VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE dulce (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(150) NOT NULL,
+  precio DECIMAL(10, 2) NOT NULL,
+  stock INTEGER NOT NULL DEFAULT 0,
+  categoria_id INTEGER NOT NULL REFERENCES categoria(id) ON DELETE CASCADE,
+  proveedor_id INTEGER NOT NULL REFERENCES proveedor(id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE INDEX idx_dulce_categoria ON dulce(categoria_id);
+CREATE INDEX idx_dulce_proveedor ON dulce(proveedor_id);
