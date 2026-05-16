@@ -3,6 +3,10 @@ import * as dulceController from '../controllers/dulceController.js';
 
 const router = express.Router();
 
+
+router.get('/resumen', dulceController.getResumenDulces);
+
+
 router.get('/', dulceController.getAllDulces);
 router.get('/:id', dulceController.getDulceById);
 router.post('/', dulceController.createDulce);
